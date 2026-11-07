@@ -1475,15 +1475,21 @@ onClick={() => setStep(2)}
                     Check GSTN
                   </button>
                 </div>
-                {lookupGstinRes && (
-                  <div className="text-[11px] bg-slate-50 p-2 rounded-lg border border-slate-200">
+{lookupGstinRes && (
+                  <div className="text-[11px] bg-slate-50 p-2.5 rounded-lg border border-slate-200">
                     <strong>Status:</strong>{' '}
-                    {lookupGstinRes.registry_data ? (
+                    {!lookupGstinRes.format_valid ? (
+                      <span className="text-red-600 font-bold">
+                        ❌ Invalid Format/Checksum — {lookupGstinRes.format_reason}
+                      </span>
+                    ) : lookupGstinRes.registry_data ? (
                       <span className={lookupGstinRes.registry_data.status === 'Active' ? 'text-emerald-700 font-bold' : 'text-red-600 font-bold'}>
-                        {lookupGstinRes.registry_data.status} — {lookupGstinRes.registry_data.trade_name}
+                        {lookupGstinRes.registry_data.status === 'Active' ? '✓ Active' : `⚠️ ${lookupGstinRes.registry_data.status}`} — {lookupGstinRes.registry_data.trade_name} ({lookupGstinRes.registry_data.state})
                       </span>
                     ) : (
-                      <span className="text-red-600">{lookupGstinRes.format_reason || 'Not found'}</span>
+                      <span className="text-amber-700 font-bold">
+                        ✓ Valid Mod-36 Checksum — Not found in Hackathon Mock CSV Registry
+                      </span>
                     )}
                   </div>
                 )}
@@ -1503,14 +1509,21 @@ onClick={() => setStep(2)}
                     Check MSME
                   </button>
                 </div>
-                {lookupUdyamRes && (
-                  <div className="text-[11px] bg-slate-50 p-2 rounded-lg border border-slate-200">
-                    {lookupUdyamRes.registry_data ? (
+{lookupUdyamRes && (
+                  <div className="text-[11px] bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                    <strong>Status:</strong>{' '}
+                    {!lookupUdyamRes.format_valid ? (
+                      <span className="text-red-600 font-bold">
+                        ❌ {lookupUdyamRes.format_reason}
+                      </span>
+                    ) : lookupUdyamRes.registry_data ? (
                       <span className="text-emerald-700 font-bold">
-                        Verified: {lookupUdyamRes.registry_data.enterprise_name} ({lookupUdyamRes.registry_data.city})
+                        ✓ Verified ({lookupUdyamRes.registry_data.enterprise_type}): {lookupUdyamRes.registry_data.enterprise_name} ({lookupUdyamRes.registry_data.city})
                       </span>
                     ) : (
-                      <span className="text-red-600">Not found in Udyam registry</span>
+                      <span className="text-amber-700 font-bold">
+                        ✓ Valid Format — Not found in Hackathon Mock Udyam CSV
+                      </span>
                     )}
                   </div>
                 )}

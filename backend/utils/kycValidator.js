@@ -42,12 +42,13 @@ export function normalizeOcrGstin(rawGstin = '') {
   if (db.gstinMap.has(candidate)) return candidate;
 
   // Check if an OCR letter confusion in the PAN letters (indices 2..6, like I vs J in K10) matches a registry record with the exact same digits (7..10)
+// Only repair an OCR letter misread in PAN letters (indices 2..6) if the State Code (0..2),
+  // the 4 PAN digits (7..14), AND the final Checksum character (14) match!
   for (const regGstin of db.gstinMap.keys()) {
     if (
       regGstin.slice(0, 2) === candidate.slice(0, 2) &&
-      regGstin.slice(7, 14) === candidate.slice(7, 14)
+      regGstin.slice(7, 15) === candidate.slice(7, 15)
     ) {
-      // Same state code and same 4 PAN digits! Fix any OCR letter misread in PAN letters or checksum
       return regGstin;
     }
   }
