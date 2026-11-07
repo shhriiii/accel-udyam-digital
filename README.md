@@ -1,6 +1,6 @@
 # Project Udyam Digital - Accel Business (Airtel SYNC Hackathon 2026)
 
-**[ Watch our Project Demo on YouTube here](YOUR_YOUTUBE_VIDEO_LINK_HERE)**
+**[ Watch our Project Demo on YouTube here](https://www.youtube.com/watch?v=Vg5uRvMicDU)**
 
 **AI-First MSME Acquisition, Automated Forensic e-KYC & Zero-Touch Provisioning Platform**  
 **Team Name:** Team Rannchhoddas!  
